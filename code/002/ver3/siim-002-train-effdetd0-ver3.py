@@ -3,8 +3,6 @@ get_ipython().system('tar xfz ../input/nfl-lib/pkgs.tgz')
 # for pytorch1.6
 cmd = "sed -i -e 's/ \/ / \/\/ /' timm-efficientdet-pytorch/effdet/bench.py"
 get_ipython().system('$cmd')
-
-
 # ====================================================
 # Library #
 # ====================================================
@@ -115,7 +113,8 @@ class CFG:
     gradient_accumulation_steps = 1
     max_grad_norm = 10000
     seed = 42
-    target_col = 'integer_label'
+    target_col = 'detection_label'
+    target_dict = {0: 'none', 1: 'opacity'}
     n_fold = 5
     trn_fold = [0]
     train = True
@@ -206,19 +205,23 @@ def get_test_file_path(image_id):
 
 train = pd.read_csv(os.path.join(ROOT_DIR, 'input/siim-covid19-updated-train-labels/updated_train_labels.csv'))
 train['jpg_path'] = train['id'].apply(get_train_file_path)
-train['detection_label'] = train.apply(lambda row: 'none' if row[[
-    'xmin', 'ymin', 'xmax', 'ymax']].values.tolist() == [0, 0, 1, 1] else 'opacity', axis=1)
+train['detection_label'] = train.apply(lambda row: 0 if row[[
+    'xmin', 'ymin', 'xmax', 'ymax']].values.tolist() == [0, 0, 1, 1] else 1, axis=1)
 cols = ['xmin', 'ymin', 'xmax', 'ymax']
-for idx, (xmin, ymin, xmax, ymax) in enumerate(zip(train['frac_xmin'].to_numpy(),
-                                                   train['frac_ymin'].to_numpy(),
-                                                   train['frac_xmax'].to_numpy(),
-                                                   train['frac_ymax'].to_numpy())):
-    bbox = [xmin, ymin, xmax, ymax]
-    train.loc[idx, cols] = A.convert_bbox_from_albumentations(bbox, 'pascal_voc', CFG.size, CFG.size)
+for idx, (xmin, ymin, xmax, ymax, label) in enumerate(zip(train['frac_xmin'].to_numpy(),
+                                                          train['frac_ymin'].to_numpy(),
+                                                          train['frac_xmax'].to_numpy(),
+                                                          train['frac_ymax'].to_numpy(),
+                                                          train['detection_label'].to_numpy())):
+    if label == 0:
+        train.loc[idx, cols] = [0, 0, 1, 1]
+    else:
+        bbox = [xmin, ymin, xmax, ymax]
+        train.loc[idx, cols] = A.convert_bbox_from_albumentations(bbox, 'pascal_voc', CFG.size, CFG.size)
 
 if CFG.debug:
     CFG.epochs = 1
-#     train = train.sample(n=1000, random_state=CFG.seed).reset_index(drop=True)
+    train = train.sample(n=1000, random_state=CFG.seed).reset_index(drop=True)
 
 
 # ====================================================
@@ -549,8 +552,6 @@ def get_transforms(*, data):
         ], bbox_params={'format': 'pascal_voc', 'label_fields': ['labels']})
 
 
-# 今回は各bboxにラベルが割り振られているのではなく、bboxのラベルはopecity一択で、画像自体にラベルが4択で付与されているから、
-# そのままbboxのラベルとして当てに行くとおかしくなる気がするけど、どうなんだろう。
 class SiimDataset(Dataset):
 
     def __init__(self, df, transform=None):
@@ -567,7 +568,7 @@ class SiimDataset(Dataset):
 
         target = {}
         target['boxes'] = boxes
-        target['labels'] = labels
+        target['labels'] = torch.tensor(labels)
         target['image_id'] = torch.tensor([index])
 
         if self.transform:
@@ -594,15 +595,16 @@ class SiimDataset(Dataset):
         records = self.df[self.df['id'] == image_id]
         boxes = []
         # bboxが複数ある場合はレコードで分かれているため、idが同じものは全てまとめている
-        for bbox in records[['frac_xmin', 'frac_ymin', 'frac_xmax', 'frac_ymax']].values:
+        for detection_label, bbox in zip(records['detection_label'].values, records[['frac_xmin', 'frac_ymin', 'frac_xmax', 'frac_ymax']].values):
             bbox = np.clip(bbox, 0, 1.0)
             # fracは正規化した座標なので、今回はpascal_vocのformatに合わせる。(0~256で表す)
-            temp = A.convert_bbox_from_albumentations(bbox, 'pascal_voc', image.shape[0], image.shape[1])
+            if detection_label == 0:
+                temp = [0, 0, 1, 1]
+            else:
+                temp = A.convert_bbox_from_albumentations(bbox, 'pascal_voc', image.shape[0], image.shape[1])
             boxes.append(temp)
-        """
-        [0: 'atypical', 1: 'indeterminate', 2: 'negative', 3: 'typical']
-        """
-        labels = torch.ones((records.shape[0],), dtype=torch.int64)
+
+        labels = records['detection_label'].values
         return image, boxes, labels
 
 
@@ -825,7 +827,7 @@ def valid_fn(valid_loader, model, criterion, device):
         with torch.no_grad():
             loss, _, _ = model(images, boxes, labels)
 
-        losses.update(loss, batch_size)
+        losses.update(loss.item(), batch_size)
         # record accuracy
         if CFG.gradient_accumulation_steps > 1:
             loss = loss / CFG.gradient_accumulation_steps
@@ -857,14 +859,18 @@ def make_predictions(valid_loader, model, device, score_threshold):
                 # 画像一枚ごとにboxなどを出す
                 boxes = outputs[i].detach().cpu().numpy()[:, :4]
                 scores = outputs[i].detach().cpu().numpy()[:, 4]
+                labels = outputs[i].detach().cpu().numpy()[:, 5]
                 indexes = np.where(scores > score_threshold)[0]
                 boxes = boxes[indexes]
-                for j in range(len(boxes)):
-                    # 一枚の画像に対してboxesなどは複数あるから、それらを一つずつ入れていく
-                    if j == 0:
-                        predictions.append([image_ids[i], 'none', 1, 0, 0, 1, 1])
-                    else:
-                        predictions.append([image_ids[i], 'opacity', scores[j], boxes[j][0], boxes[j][1], boxes[j][2], boxes[j][3]])
+                scores = scores[indexes]
+                labels = labels[indexes]
+                # 予測がない場合はnoneクラスに入れる。
+                if len(boxes) == 0:
+                    predictions.append([image_ids[i], 0, CFG.target_dict[0], 0, 0, 1, 1])
+                else:
+                    for j in range(len(boxes)):
+                        # 一枚の画像に対してboxesなどは複数あるから、それらを一つずつ入れていく
+                        predictions.append([image_ids[i], CFG.target_dict[labels[j]], scores[j], boxes[j][0], boxes[j][1], boxes[j][2], boxes[j][3]])
     return np.stack(predictions, axis=0)
 
 
@@ -936,8 +942,8 @@ def train_loop(folds, fold):
 
     # calculate CV
     model = get_model_inference(model_path=os.path.join(OUTPUT_DIR, f'{CFG.model_name}_fold{fold}_best.pth'))
-    predictions = make_predictions(valid_loader, model, device, score_threshold=0)
-    annotations = folds[['id', 'detection_label', 'xmin', 'ymin', 'xmax', 'ymax']]
+    predictions = make_predictions(valid_loader, model, device, score_threshold=0.5)
+    annotations = valid_folds[['id', 'detection_label', 'xmin', 'ymin', 'xmax', 'ymax']].values
     np.save('predictions.npy', predictions)
     np.save('annotations.npy', annotations)
 
@@ -945,14 +951,13 @@ def train_loop(folds, fold):
     gc.collect()
     torch.cuda.empty_cache()
 
-    return best_loss.cpu().numpy(), annotations, predictions
+    return best_loss, annotations, predictions
 
 
 # ====================================================
 # main #
 # ====================================================
 def main():
-
     """
     Prepare: 1.train 2.test 3.submission 4.folds
     """
