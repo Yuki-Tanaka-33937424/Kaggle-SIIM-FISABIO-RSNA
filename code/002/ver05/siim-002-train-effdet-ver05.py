@@ -1100,7 +1100,7 @@ def main():
             if fold in CFG.trn_fold:
                 loss, annotations, predictions = train_loop(folds, fold)
                 losses.append(loss)
-                mAP = mean_average_precision_for_boxes(annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=True)
+                mAP, _ = mean_average_precision_for_boxes(annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=True)
                 mAPs.append(mAP)
                 LOGGER.info(f'========== fold: {fold} result ==========')
                 LOGGER.info(f'best loss: {loss:.4f}')
