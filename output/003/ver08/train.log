@@ -1,0 +1,28 @@
+========== fold: 0 training ==========
+========== fold: 0 training ==========
+========== fold: 0 training ==========
+Epoch 1 - avg_train_loss: 0.5545  avg_val_loss: 0.4475  time: 16s
+Epoch 1 - mAP: 0.2512459206089126
+Epoch 1 - Save Best Score: 0.2512 Model
+========== fold: 0 result ==========
+Class: detection_label AP: 0.2512
+========== fold: 0 training ==========
+Epoch 1 - avg_train_loss: 0.4081  avg_val_loss: 0.3469  time: 127s
+Epoch 1 - mAP: 0.33466054817333424
+Epoch 1 - Save Best Score: 0.3347 Model
+Epoch 2 - avg_train_loss: 0.3395  avg_val_loss: 0.3353  time: 125s
+Epoch 2 - mAP: 0.34714655184308796
+Epoch 2 - Save Best Score: 0.3471 Model
+Epoch 3 - avg_train_loss: 0.2964  avg_val_loss: 0.3311  time: 124s
+Epoch 3 - mAP: 0.35787826499741315
+Epoch 3 - Save Best Score: 0.3579 Model
+Epoch 4 - avg_train_loss: 0.2582  avg_val_loss: 0.3278  time: 125s
+Epoch 4 - mAP: 0.3520090202795094
+Epoch 5 - avg_train_loss: 0.2139  avg_val_loss: 0.3273  time: 126s
+Epoch 5 - mAP: 0.36186747881222914
+Epoch 5 - Save Best Score: 0.3619 Model
+Epoch 6 - avg_train_loss: 0.1807  avg_val_loss: 0.3300  time: 123s
+Epoch 6 - mAP: 0.3619814896765282
+Epoch 6 - Save Best Score: 0.3620 Model
+========== fold: 0 result ==========
+Class: detection_label AP: 0.3620
