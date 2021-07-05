@@ -85,7 +85,7 @@ class CFG:
     debug = False
     use_amp = False
     print_freq = 100
-    size = 512
+    size = 384
     epochs = 6
     gradient_accumulation_steps = 1
     max_grad_norm = 10000
@@ -101,21 +101,21 @@ class CFG:
     ######################
     loader_params = {
         "train": {
-            "batch_size": 24,
+            "batch_size": 16,
             "num_workers": 4,
             "shuffle": True,
             "pin_memory": True,
             "drop_last": True
         },
         "valid": {
-            "batch_size": 48,
+            "batch_size": 32,
             "num_workers": 4,
             "shuffle": False,
             "pin_memory": True,
             "drop_last": False
         },
         "test": {
-            "batch_size": 48,
+            "batch_size": 32,
             "num_workers": 4,
             "shuffle": False,
             "pin_memory": True,
