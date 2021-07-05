@@ -863,7 +863,7 @@ def main():
                 annotations_ = get_annotations(_oof_df)
                 predictions_ = get_predictions(_oof_df, col='preds')
                 annotations = pd.concat([annotations, annotations_], axis=0)
-                predictions = pd.concat([predictions, predictions_], axis=1)
+                predictions = pd.concat([predictions, predictions_], axis=0)
                 mAP, AP = mean_average_precision_for_boxes(
                     annotations_, predictions_, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
                 LOGGER.info(f"Class: none  AP: {AP['0'][0]:.4f}")
