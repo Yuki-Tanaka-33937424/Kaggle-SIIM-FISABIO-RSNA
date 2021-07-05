@@ -162,7 +162,7 @@ class CFG:
     ######################
     # Model #
     ######################
-    model_name = "tf_efficientnet_b4_ns"
+    model_name = "tf_efficientnet_b3_ns"
     pretrained = True
     target_size = 1
 
