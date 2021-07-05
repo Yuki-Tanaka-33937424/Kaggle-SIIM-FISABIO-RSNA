@@ -12,6 +12,7 @@ from requests import get
 from pathlib import Path
 from contextlib import contextmanager
 from collections import defaultdict, Counter
+from IPython.display import display
 
 import scipy as sp
 import numpy as np
@@ -36,7 +37,6 @@ from torch.nn.parameter import Parameter
 from torch.utils.data import DataLoader, Dataset
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts, CosineAnnealingLR, ReduceLROnPlateau
 
-import albumentations as A
 from albumentations import (
     Compose, OneOf, Normalize, Resize, RandomResizedCrop, RandomCrop, HorizontalFlip, VerticalFlip,
     RandomBrightness, RandomContrast, RandomBrightnessContrast, Rotate, ShiftScaleRotate, Cutout,
@@ -69,6 +69,7 @@ if 'kaggle_web_client' in sys.modules:
 else:
     name_code = os.path.splitext(os.path.basename(__file__))[0].split('-')
     OUTPUT_DIR = os.path.join(ROOT_DIR, 'output/', name_code[1], name_code[-1])
+    print(OUTPUT_DIR)
 
 if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
@@ -84,12 +85,13 @@ class CFG:
     debug = False
     use_amp = False
     print_freq = 100
-    size = 384
+    size = 512
     epochs = 6
     gradient_accumulation_steps = 1
     max_grad_norm = 10000
     seed = 42
-    target_col = 'detection_label'
+    target_cols = ['Negative for Pneumonia', 'Typical Appearance',
+                   'Indeterminate Appearance', 'Atypical Appearance']
     n_fold = 5
     trn_fold = [0]
     train = True
@@ -99,21 +101,21 @@ class CFG:
     ######################
     loader_params = {
         "train": {
-            "batch_size": 32,
+            "batch_size": 24,
             "num_workers": 4,
             "shuffle": True,
             "pin_memory": True,
             "drop_last": True
         },
         "valid": {
-            "batch_size": 64,
+            "batch_size": 48,
             "num_workers": 4,
             "shuffle": False,
             "pin_memory": True,
             "drop_last": False
         },
         "test": {
-            "batch_size": 64,
+            "batch_size": 48,
             "num_workers": 4,
             "shuffle": False,
             "pin_memory": True,
@@ -125,6 +127,7 @@ class CFG:
     # Split #
     ######################
     split_name = "StratifiedKFold"
+    split_col = 'split_label'
     split_params = {
         "n_splits": 5,
         "shuffle": True,
@@ -164,37 +167,25 @@ class CFG:
     ######################
     model_name = "tf_efficientnet_b3_ns"
     pretrained = True
-    target_size = 1
+    target_size = 4
 
 
 # ====================================================
 # Data Loading #
 # ====================================================
 def get_train_file_path(image_id):
-    return os.path.join(ROOT_DIR, f"input/siim-covid19-resized-to-256px-jpg/train/{image_id}.jpg")
+    return os.path.join(ROOT_DIR, f"input/siimcovid19-512-img-png-600-study-png/study/{image_id}.png")
 
 
 def get_test_file_path(image_id):
-    return os.path.join(ROOT_DIR, f"/input/siim-covid19-resized-to-256px-jpg/test/{image_id}.jpg")
+    # テストデータのパスはこれではないが、今回は読み込まないのでこのままにしておく
+    return os.path.join(ROOT_DIR, f"input/siimcovid19-512-img-png-600-study-png/study/{image_id}.png")
 
 
-train = pd.read_csv(os.path.join(ROOT_DIR, 'input/siim-covid19-updated-train-labels/updated_train_labels.csv'))
-train['detection_label'] = train.apply(lambda row: 0 if row[[
-    'xmin', 'ymin', 'xmax', 'ymax']].values.tolist() == [0, 0, 1, 1] else 1, axis=1)
-# この処理は重たく、しかもmAPに関係ないので省く
-# cols = ['xmin', 'ymin', 'xmax', 'ymax']
-# for idx, (xmin, ymin, xmax, ymax, label) in enumerate(zip(train['frac_xmin'].to_numpy(),
-#                                                           train['frac_ymin'].to_numpy(),
-#                                                           train['frac_xmax'].to_numpy(),
-#                                                           train['frac_ymax'].to_numpy(),
-#                                                           train['detection_label'].to_numpy())):
-#     if label == 0:
-#         train.loc[idx, cols] = [0, 0, 1, 1]
-#     else:
-#         bbox = [xmin, ymin, xmax, ymax]
-#         train.loc[idx, cols] = A.convert_bbox_from_albumentations(
-#             bbox, 'pascal_voc', CFG.size, CFG.size)
-test = pd.read_csv(os.path.join(ROOT_DIR, 'input/siim-covid19-updated-train-labels/updated_sample_submission.csv'))
+train = pd.read_csv(os.path.join(ROOT_DIR, 'input/siim-covid19-detection/train_study_level.csv'))
+test = pd.read_csv(os.path.join(ROOT_DIR, 'input/siim-covid19-detection/sample_submission.csv'))
+
+train['split_label'] = train[CFG.target_cols].apply(lambda row: row.values.argmax(), axis=1)
 
 train['filepath'] = train['id'].apply(get_train_file_path)
 test['filepath'] = test['id'].apply(get_test_file_path)
@@ -207,30 +198,11 @@ if CFG.debug:
 # ====================================================
 # Utils #
 # ====================================================
-def get_score(y_true, y_pred):
-    score = roc_auc_score(y_true, y_pred)
-    return score
-
-
-def get_result(result_df):
-    preds = result_df['preds'].values
-    labels = result_df[CFG.target_col].values
-    score = get_score(labels, preds)
-    LOGGER.info(f'Score: {score:<.5f}')
-
-
-def get_annotations(df):
-    return df[['id', 'detection_label', 'xmin', 'ymin', 'xmax', 'ymax']]
-
-
-def get_predictions(df, col):
+def get_annotations(df, col):
     df_ = df.copy()
     df_ = df_[['id', col]]
-    df_ = df_.rename(columns={col: 'conf'})
-    df_['conf'] = df_['conf'].apply(lambda x: 1 - x)
-    # df_['detection_label'] = df_['conf'].apply(lambda x: '0' if x > 0.5 else '1')
+    df_ = df_.rename(columns={col: 'detection_label'})
     df_bbox = pd.DataFrame({
-        'detection_label': ['0'] * len(df_),
         'xmin': [0] * len(df_),
         'ymin': [0] * len(df_),
         'xmax': [1] * len(df_),
@@ -238,6 +210,37 @@ def get_predictions(df, col):
     })
     df_ = pd.concat([df_, df_bbox], axis=1)
     return df_
+
+
+def get_predictions(df, col):
+    df_ = df.copy()
+    df_ = df_[['id', f'pred_{col}']]
+    df_ = df_.rename(columns={f'pred_{col}': 'conf'})
+    df_bbox = pd.DataFrame({
+        'detection_label': ['1'] * len(df_),
+        'xmin': [0] * len(df_),
+        'ymin': [0] * len(df_),
+        'xmax': [1] * len(df_),
+        'ymax': [1] * len(df_),
+    })
+    df_ = pd.concat([df_, df_bbox], axis=1)
+    return df_
+
+
+def get_score(y_true, y_pred):
+    scores = []
+    for i in range(y_true.shape[1]):
+        score = roc_auc_score(y_true[:, i], y_pred[:, i])
+        scores.append(score)
+    avg_score = np.mean(scores)
+    return avg_score, scores
+
+
+def get_result(result_df):
+    preds = result_df[[f'pred_{c}' for c in CFG.target_cols]].values
+    labels = result_df[CFG.target_cols].values
+    score, scores = get_score(labels, preds)
+    LOGGER.info(f'Score: {score:<.4f}  Scores: {np.round(scores, decimals=4)}')
 
 
 def compute_overlap(boxes, query_boxes):
@@ -529,10 +532,10 @@ device = get_device()
 # =================================================
 folds = train.copy()
 Fold = model_selection.__getattribute__(CFG.split_name)(**CFG.split_params)
-for n, (train_index, valid_index) in enumerate(Fold.split(folds, folds[CFG.target_col])):
+for n, (train_index, valid_index) in enumerate(Fold.split(folds, folds[CFG.split_col])):
     folds.loc[valid_index, 'fold'] = int(n)
 folds['fold'] = folds['fold'].astype(int)
-print(folds.groupby(['fold', CFG.target_col]).size())
+print(folds.groupby(['fold', CFG.split_col]).size())
 
 
 # ====================================================
@@ -573,7 +576,7 @@ class SiimDataset(Dataset):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         if self.transform:
             image = self.transform(image=image)['image']
-        label = torch.tensor(self.df.loc[idx, CFG.target_col])
+        label = torch.tensor(self.df.loc[idx, CFG.target_cols])
         return image.float(), label.float()
 
 
@@ -740,7 +743,7 @@ def valid_fn(valid_loader, model, criterion, device):
         loss = criterion(y_preds, labels)
         losses.update(loss.item(), batch_size)
         # record accuracy
-        preds.append(y_preds.sigmoid().to('cpu').numpy())
+        preds.append(y_preds.softmax(1).to('cpu').numpy())
         if CFG.gradient_accumulation_steps > 1:
             loss = loss / CFG.gradient_accumulation_steps
         # measure elapsed time
@@ -809,20 +812,26 @@ def train_loop(folds, fold):
 
         # eval
         avg_val_loss, preds = valid_fn(valid_loader, model, criterion, device)
+        valid_labels = valid_folds[CFG.target_cols].values
 
         scheduler_step(scheduler)
 
         # scoring
-        valid_folds['preds'] = preds
-        annotations = get_annotations(valid_folds)
-        predictions = get_predictions(valid_folds, col='preds')
-        mAP, AP = mean_average_precision_for_boxes(
-            annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
-        score = AP['0'][0]
+        for c in [f'pred_{c}' for c in CFG.target_cols]:
+            valid_folds[c] = np.nan
+        valid_folds[[f'pred_{c}' for c in CFG.target_cols]] = preds
+        mAPs = []
+        for col in CFG.target_cols:
+            annotations = get_annotations(valid_folds, col)
+            predictions = get_predictions(valid_folds, col)
+            mAP, AP = mean_average_precision_for_boxes(annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
+            mAPs.append(AP["1"][0])
+        score = np.mean(mAPs)
 
         elapsed = time.time() - start_time
 
         LOGGER.info(f'Epoch {epoch+1} - avg_train_loss: {avg_loss:.4f}  avg_val_loss: {avg_val_loss:.4f}  time: {elapsed:.0f}s')
+        LOGGER.info(f'Epoch {epoch+1} - Negative: {mAPs[0]:.4f}  Typical: {mAPs[1]:.4f}  Indeterminate: {mAPs[2]:.4f}  Atypical: {mAPs[3]:.4f}')
         LOGGER.info(f'Epoch {epoch+1} - mAP: {score}')
 
         if score > best_score:
@@ -834,7 +843,9 @@ def train_loop(folds, fold):
                        )
 
     check_point = torch.load(os.path.join(OUTPUT_DIR, f'{CFG.model_name}_fold{fold}_best.pth'))
-    valid_folds['preds'] = check_point['preds']
+    for c in [f'pred_{c}' for c in CFG.target_cols]:
+        valid_folds[c] = np.nan
+    valid_folds[[f'pred_{c}' for c in CFG.target_cols]] = check_point['preds']
 
     del model, optimizer, scheduler
     gc.collect()
@@ -860,19 +871,26 @@ def main():
             if fold in CFG.trn_fold:
                 _oof_df = train_loop(folds, fold)
                 LOGGER.info(f'========== fold: {fold} result ==========')
-                annotations_ = get_annotations(_oof_df)
-                predictions_ = get_predictions(_oof_df, col='preds')
-                annotations = pd.concat([annotations, annotations_], axis=0)
-                predictions = pd.concat([predictions, predictions_], axis=0)
-                mAP, AP = mean_average_precision_for_boxes(
-                    annotations_, predictions_, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
-                LOGGER.info(f"Class: none  AP: {AP['0'][0]:.4f}")
+                mAPs = []
+                for col in CFG.target_cols:
+                    annotations_ = get_annotations(_oof_df)
+                    predictions_ = get_predictions(_oof_df, col='preds')
+                    annotations = pd.concat([annotations, annotations_], axis=0)
+                    predictions = pd.concat([predictions, predictions_], axis=0)
+                    mAP, AP = mean_average_precision_for_boxes(annotations_, predictions_, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
+                    mAPs.append(AP["1"][0])
+                    LOGGER.info(f'Class: {col}  AP: {AP["1"][0]:.4f}')
+                LOGGER.info(f'mAP: {np.mean(mAPs):.4f}')
 
         # CV result
         if len(CFG.trn_fold) != 1:
             LOGGER.info('========== CV ==========')
-            mAP, AP = mean_average_precision_for_boxes(annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
-            LOGGER.info(f"Class: none  AP: {AP['0'][0]:.4f}")
+            mAPs = []
+            for col in CFG.target_cols:
+                mAP, AP = mean_average_precision_for_boxes(annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
+                mAPs.append(AP['1'][0])
+                LOGGER.info(f'Class: {col} AP: {AP["1"][0]:.4f}')
+            LOGGER.info(f'mAP: {np.mean(mAPs):.4f}')
 
         # save result
         annotations.to_pickle(os.path.join(OUTPUT_DIR, 'annotations.pkl'))
