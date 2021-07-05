@@ -865,18 +865,16 @@ def main():
 
     if CFG.train:
         # train
-        annotations = pd.DataFrame()
-        predictions = pd.DataFrame()
+        oof_df = pd.DataFrame()
         for fold in range(CFG.n_fold):
             if fold in CFG.trn_fold:
                 _oof_df = train_loop(folds, fold)
+                oof_df = pd.concat([oof_df, _oof_df]).reset_index(drop=True)
                 LOGGER.info(f'========== fold: {fold} result ==========')
                 mAPs = []
                 for col in CFG.target_cols:
-                    annotations_ = get_annotations(_oof_df)
-                    predictions_ = get_predictions(_oof_df, col='preds')
-                    annotations = pd.concat([annotations, annotations_], axis=0)
-                    predictions = pd.concat([predictions, predictions_], axis=0)
+                    annotations_ = get_annotations(_oof_df, col)
+                    predictions_ = get_predictions(_oof_df, col)
                     mAP, AP = mean_average_precision_for_boxes(annotations_, predictions_, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
                     mAPs.append(AP["1"][0])
                     LOGGER.info(f'Class: {col}  AP: {AP["1"][0]:.4f}')
@@ -887,14 +885,15 @@ def main():
             LOGGER.info('========== CV ==========')
             mAPs = []
             for col in CFG.target_cols:
+                annotations = get_annotations(oof_df, col)
+                predictions = get_predictions(oof_df, col)
                 mAP, AP = mean_average_precision_for_boxes(annotations, predictions, iou_threshold=0.5, exclude_not_in_annotations=False, verbose=False)
                 mAPs.append(AP['1'][0])
                 LOGGER.info(f'Class: {col} AP: {AP["1"][0]:.4f}')
             LOGGER.info(f'mAP: {np.mean(mAPs):.4f}')
 
         # save result
-        annotations.to_pickle(os.path.join(OUTPUT_DIR, 'annotations.pkl'))
-        predictions.to_pickle(os.path.join(OUTPUT_DIR, 'predictions.pkl'))
+        oof_df.to_pickle(os.path.join(OUTPUT_DIR, 'oof_df.pkl'))
 
 
 if __name__ == '__main__':
