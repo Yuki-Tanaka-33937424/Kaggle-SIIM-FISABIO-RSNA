@@ -1,0 +1,22 @@
+========== fold: 0 training ==========
+Epoch 1 - avg_train_loss: 33.6220  avg_val_loss: 2.8646  time: 403s
+Epoch 1 - Save Best Loss: 2.8646 Model
+Epoch 2 - avg_train_loss: 1.5186  avg_val_loss: 1.4444  time: 396s
+Epoch 2 - Save Best Loss: 1.4444 Model
+Epoch 3 - avg_train_loss: 1.1035  avg_val_loss: 1.1538  time: 391s
+Epoch 3 - Save Best Loss: 1.1538 Model
+Epoch 4 - avg_train_loss: 0.9897  avg_val_loss: 1.1474  time: 388s
+Epoch 4 - Save Best Loss: 1.1474 Model
+Epoch 5 - avg_train_loss: 0.9340  avg_val_loss: 1.0703  time: 389s
+Epoch 5 - Save Best Loss: 1.0703 Model
+Epoch 6 - avg_train_loss: 0.8970  avg_val_loss: 1.0311  time: 385s
+Epoch 6 - Save Best Loss: 1.0311 Model
+Epoch 7 - avg_train_loss: 0.8672  avg_val_loss: 1.0204  time: 393s
+Epoch 7 - Save Best Loss: 1.0204 Model
+Epoch 8 - avg_train_loss: 0.8391  avg_val_loss: 1.0052  time: 385s
+Epoch 8 - Save Best Loss: 1.0052 Model
+Epoch 9 - avg_train_loss: 0.8128  avg_val_loss: 1.0143  time: 389s
+Epoch 10 - avg_train_loss: 0.7962  avg_val_loss: 1.0112  time: 388s
+========== fold: 0 result ==========
+best loss: 1.0052
+Class: opacity  AP: 0.0000
