@@ -85,7 +85,7 @@ class CFG:
     use_amp = False
     print_freq = 100
     size = 384
-    epochs = 6
+    epochs = 10
     gradient_accumulation_steps = 1
     max_grad_norm = 10000
     seed = 42
@@ -154,7 +154,7 @@ class CFG:
     ######################
     scheduler_name = 'CosineAnnealingLR'
     scheduler_params = {
-        "T_max": 6,
+        "T_max": 10,
         "eta_min": 1e-6,
         "last_epoch": -1
     }
@@ -162,7 +162,7 @@ class CFG:
     ######################
     # Model #
     ######################
-    model_name = "tf_efficientnet_b4_ns"
+    model_name = "tf_efficientnet_b3_ns"
     pretrained = True
     target_size = 1
 
