@@ -1,0 +1,204 @@
+========== fold: 0 training ==========
+iou_thresh: 0.4
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.242868
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.249600
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.251743
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.252385
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.251778
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.251100
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.248799
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.250403
+iou_thresh: 0.45
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.249535
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.255431
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.258217
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.259565
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.257934
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.256658
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.255898
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.256638
+iou_thresh: 0.5
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261517
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262028
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.263797
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.263485
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.260934
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.260607
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.259960
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.260537
+iou_thresh: 0.55
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261432
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262817
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.264566
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.264028
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261487
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261494
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.260908
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261351
+iou_thresh: 0.6
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261428
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.263027
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.263555
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262987
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261038
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.260353
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.259565
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.259751
+iou_thresh: 0.65
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261493
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262221
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262084
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261133
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.258947
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.257825
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.256852
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.257885
+iou_thresh: 0.7
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261507
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.260746
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.258392
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.256639
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.254099
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.252582
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.251540
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.251624
+iou_thresh: 0.75
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261447
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.255826
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.252386
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.250183
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.246874
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.244414
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.242181
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.241300
+========== fold: 0 result ==========
+best loss: inf
+Class: opacity  AP: 0.2413

@@ -1,0 +1,28 @@
+========== fold: 0 training ==========
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.252275
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.170850
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.186038
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.135670
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.132810
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.114838
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.097058
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.071985
+========== fold: 0 result ==========
+best loss: inf
+Class: opacity  AP: 0.0720

@@ -1,0 +1,79 @@
+========== fold: 0 training ==========
+iou_thresh: 0.65
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.256670
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.265052
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.271165
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.269275
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.272705
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.275570
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.276806
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.279867
+iou_thresh: 0.7
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.259962
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261966
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.265956
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.264781
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.268622
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.267630
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.270709
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.270636
+iou_thresh: 0.75
+tta: 1
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.261023
+tta: 2
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.251460
+tta: 3
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.259795
+tta: 4
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.258474
+tta: 5
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262128
+tta: 6
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262242
+tta: 7
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262361
+tta: 8
+class: none  mAP: 0.000000
+class: opacity  mAP: 0.262955
+========== fold: 0 result ==========
+best loss: inf
+Class: opacity  AP: 0.2630
