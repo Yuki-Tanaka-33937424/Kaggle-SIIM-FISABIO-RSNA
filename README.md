@@ -859,6 +859,8 @@ label - 与えられたバウンディングボックスに対する正しい予
 
 ### 20210802<br>
 - meetingをして、自分はmixupや外部データに対するpseudoラベリングを担当することになった。後半になってからはここにアイデアを書かなくなっているので反省する<br>
+- SAM optimizerとmixupで精度を上げて、そのモデルを用いてpseudoラベリングをする方針でいく。<br>
+- 外部データに関しては、以前に実験した際にはわずかにPublic scoreは落ちてしまったが、Private scoreはよくなっている可能性も十分に考えられる。<br>
 - 012<br>
   - ver4<br>
     - ver3にSAM optimzierを加えた。<br>
@@ -866,4 +868,8 @@ label - 与えられたバウンディングボックスに対する正しい予
 - 013<br>
   - ver5<br>
     - 012_ver4のstep2。同じくSAM optimizerを加えた。また、epochが10になっていたのでそのまま10にした。<br>
-    - mAP: 0.5697
+    - mAP: 0.5697<br>
+- 014<br>
+  - ver3<br>
+    - 013_ver5のstep3。SAM optimizerを加えた。また、学習率を下げた。<br>
+    - mAP: 0.5705<br>
