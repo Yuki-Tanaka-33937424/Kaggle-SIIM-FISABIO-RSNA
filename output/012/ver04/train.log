@@ -1,0 +1,156 @@
+========== fold: 0 training ==========
+Epoch 1 - avg_train_loss: 0.2568  avg_val_loss: 0.1874  time: 313s
+Epoch 1 - Negative: 0.9935  Typical: 0.9445  Indeterminate: 0.7171  Atypical: 0.2708
+Epoch 1 - mAP: 0.7314584041434782
+Epoch 1 - Save Best Score: 0.7315 Model
+Epoch 2 - avg_train_loss: 0.1883  avg_val_loss: 0.1805  time: 304s
+Epoch 2 - Negative: 0.9949  Typical: 0.9523  Indeterminate: 0.7331  Atypical: 0.3018
+Epoch 2 - mAP: 0.7454995271712126
+Epoch 2 - Save Best Score: 0.7455 Model
+Epoch 3 - avg_train_loss: 0.1788  avg_val_loss: 0.1719  time: 320s
+Epoch 3 - Negative: 0.9949  Typical: 0.9547  Indeterminate: 0.7553  Atypical: 0.3415
+Epoch 3 - mAP: 0.7616007559102511
+Epoch 3 - Save Best Score: 0.7616 Model
+Epoch 4 - avg_train_loss: 0.1631  avg_val_loss: 0.1706  time: 304s
+Epoch 4 - Negative: 0.9964  Typical: 0.9570  Indeterminate: 0.7607  Atypical: 0.4441
+Epoch 4 - mAP: 0.7895766644268221
+Epoch 4 - Save Best Score: 0.7896 Model
+Epoch 5 - avg_train_loss: 0.1509  avg_val_loss: 0.1645  time: 305s
+Epoch 5 - Negative: 0.9971  Typical: 0.9582  Indeterminate: 0.7679  Atypical: 0.4305
+Epoch 5 - mAP: 0.7884041657707186
+Epoch 6 - avg_train_loss: 0.1438  avg_val_loss: 0.1653  time: 309s
+Epoch 6 - Negative: 0.9974  Typical: 0.9583  Indeterminate: 0.7681  Atypical: 0.4320
+Epoch 6 - mAP: 0.7889273214020895
+========== fold: 0 result ==========
+Class: Negative for Pneumonia  AP: 0.9964
+Class: Typical Appearance  AP: 0.9570
+Class: Indeterminate Appearance  AP: 0.7607
+Class: Atypical Appearance  AP: 0.4441
+mAP: 0.7896
+========== fold: 1 training ==========
+Epoch 1 - avg_train_loss: 0.2589  avg_val_loss: 0.2018  time: 305s
+Epoch 1 - Negative: 0.9949  Typical: 0.9316  Indeterminate: 0.6870  Atypical: 0.2734
+Epoch 1 - mAP: 0.721732343661896
+Epoch 1 - Save Best Score: 0.7217 Model
+Epoch 2 - avg_train_loss: 0.1862  avg_val_loss: 0.1852  time: 305s
+Epoch 2 - Negative: 0.9954  Typical: 0.9511  Indeterminate: 0.7057  Atypical: 0.3121
+Epoch 2 - mAP: 0.7410632347557242
+Epoch 2 - Save Best Score: 0.7411 Model
+Epoch 3 - avg_train_loss: 0.1733  avg_val_loss: 0.1755  time: 307s
+Epoch 3 - Negative: 0.9955  Typical: 0.9579  Indeterminate: 0.7230  Atypical: 0.3875
+Epoch 3 - mAP: 0.7659623702622816
+Epoch 3 - Save Best Score: 0.7660 Model
+Epoch 4 - avg_train_loss: 0.1605  avg_val_loss: 0.1706  time: 311s
+Epoch 4 - Negative: 0.9952  Typical: 0.9652  Indeterminate: 0.7320  Atypical: 0.4191
+Epoch 4 - mAP: 0.7778704292823899
+Epoch 4 - Save Best Score: 0.7779 Model
+Epoch 5 - avg_train_loss: 0.1459  avg_val_loss: 0.1704  time: 310s
+Epoch 5 - Negative: 0.9960  Typical: 0.9665  Indeterminate: 0.7340  Atypical: 0.4358
+Epoch 5 - mAP: 0.783072992704836
+Epoch 5 - Save Best Score: 0.7831 Model
+Epoch 6 - avg_train_loss: 0.1408  avg_val_loss: 0.1676  time: 306s
+Epoch 6 - Negative: 0.9961  Typical: 0.9681  Indeterminate: 0.7338  Atypical: 0.4308
+Epoch 6 - mAP: 0.7821815536239942
+========== fold: 1 result ==========
+Class: Negative for Pneumonia  AP: 0.9960
+Class: Typical Appearance  AP: 0.9665
+Class: Indeterminate Appearance  AP: 0.7340
+Class: Atypical Appearance  AP: 0.4358
+mAP: 0.7831
+========== fold: 2 training ==========
+Epoch 1 - avg_train_loss: 0.2548  avg_val_loss: 0.1823  time: 304s
+Epoch 1 - Negative: 0.9944  Typical: 0.9488  Indeterminate: 0.6896  Atypical: 0.3056
+Epoch 1 - mAP: 0.7346193237827429
+Epoch 1 - Save Best Score: 0.7346 Model
+Epoch 2 - avg_train_loss: 0.1904  avg_val_loss: 0.1732  time: 305s
+Epoch 2 - Negative: 0.9972  Typical: 0.9545  Indeterminate: 0.7053  Atypical: 0.3468
+Epoch 2 - mAP: 0.7509799304993618
+Epoch 2 - Save Best Score: 0.7510 Model
+Epoch 3 - avg_train_loss: 0.1749  avg_val_loss: 0.1670  time: 303s
+Epoch 3 - Negative: 0.9979  Typical: 0.9616  Indeterminate: 0.6987  Atypical: 0.3686
+Epoch 3 - mAP: 0.7567105748863606
+Epoch 3 - Save Best Score: 0.7567 Model
+Epoch 4 - avg_train_loss: 0.1584  avg_val_loss: 0.1634  time: 303s
+Epoch 4 - Negative: 0.9980  Typical: 0.9591  Indeterminate: 0.7194  Atypical: 0.3734
+Epoch 4 - mAP: 0.7624908451455511
+Epoch 4 - Save Best Score: 0.7625 Model
+Epoch 5 - avg_train_loss: 0.1478  avg_val_loss: 0.1615  time: 312s
+Epoch 5 - Negative: 0.9981  Typical: 0.9612  Indeterminate: 0.7263  Atypical: 0.3981
+Epoch 5 - mAP: 0.7709364932712539
+Epoch 5 - Save Best Score: 0.7709 Model
+Epoch 6 - avg_train_loss: 0.1386  avg_val_loss: 0.1617  time: 314s
+Epoch 6 - Negative: 0.9982  Typical: 0.9615  Indeterminate: 0.7341  Atypical: 0.3968
+Epoch 6 - mAP: 0.7726460876689439
+Epoch 6 - Save Best Score: 0.7726 Model
+========== fold: 2 result ==========
+Class: Negative for Pneumonia  AP: 0.9982
+Class: Typical Appearance  AP: 0.9615
+Class: Indeterminate Appearance  AP: 0.7341
+Class: Atypical Appearance  AP: 0.3968
+mAP: 0.7726
+========== fold: 3 training ==========
+Epoch 1 - avg_train_loss: 0.2596  avg_val_loss: 0.1798  time: 310s
+Epoch 1 - Negative: 0.9936  Typical: 0.9576  Indeterminate: 0.7169  Atypical: 0.2913
+Epoch 1 - mAP: 0.7398628551237534
+Epoch 1 - Save Best Score: 0.7399 Model
+Epoch 2 - avg_train_loss: 0.1884  avg_val_loss: 0.1749  time: 308s
+Epoch 2 - Negative: 0.9957  Typical: 0.9591  Indeterminate: 0.7506  Atypical: 0.3348
+Epoch 2 - mAP: 0.7600327410039995
+Epoch 2 - Save Best Score: 0.7600 Model
+Epoch 3 - avg_train_loss: 0.1728  avg_val_loss: 0.1647  time: 313s
+Epoch 3 - Negative: 0.9980  Typical: 0.9624  Indeterminate: 0.7684  Atypical: 0.3251
+Epoch 3 - mAP: 0.7634655227057062
+Epoch 3 - Save Best Score: 0.7635 Model
+Epoch 4 - avg_train_loss: 0.1601  avg_val_loss: 0.1622  time: 311s
+Epoch 4 - Negative: 0.9981  Typical: 0.9605  Indeterminate: 0.7735  Atypical: 0.4884
+Epoch 4 - mAP: 0.8051271006916068
+Epoch 4 - Save Best Score: 0.8051 Model
+Epoch 5 - avg_train_loss: 0.1514  avg_val_loss: 0.1542  time: 306s
+Epoch 5 - Negative: 0.9985  Typical: 0.9620  Indeterminate: 0.7759  Atypical: 0.5025
+Epoch 5 - mAP: 0.8097158153183113
+Epoch 5 - Save Best Score: 0.8097 Model
+Epoch 6 - avg_train_loss: 0.1402  avg_val_loss: 0.1544  time: 317s
+Epoch 6 - Negative: 0.9986  Typical: 0.9627  Indeterminate: 0.7736  Atypical: 0.5033
+Epoch 6 - mAP: 0.8095318764125057
+========== fold: 3 result ==========
+Class: Negative for Pneumonia  AP: 0.9985
+Class: Typical Appearance  AP: 0.9620
+Class: Indeterminate Appearance  AP: 0.7759
+Class: Atypical Appearance  AP: 0.5025
+mAP: 0.8097
+========== fold: 4 training ==========
+Epoch 1 - avg_train_loss: 0.2612  avg_val_loss: 0.2041  time: 306s
+Epoch 1 - Negative: 0.9912  Typical: 0.9425  Indeterminate: 0.6497  Atypical: 0.3188
+Epoch 1 - mAP: 0.7255520925821783
+Epoch 1 - Save Best Score: 0.7256 Model
+Epoch 2 - avg_train_loss: 0.1873  avg_val_loss: 0.1944  time: 312s
+Epoch 2 - Negative: 0.9920  Typical: 0.9513  Indeterminate: 0.6795  Atypical: 0.3393
+Epoch 2 - mAP: 0.7405188798043832
+Epoch 2 - Save Best Score: 0.7405 Model
+Epoch 3 - avg_train_loss: 0.1720  avg_val_loss: 0.1934  time: 314s
+Epoch 3 - Negative: 0.9930  Typical: 0.9489  Indeterminate: 0.7034  Atypical: 0.3160
+Epoch 3 - mAP: 0.7403318246217427
+Epoch 4 - avg_train_loss: 0.1587  avg_val_loss: 0.1763  time: 308s
+Epoch 4 - Negative: 0.9937  Typical: 0.9533  Indeterminate: 0.7242  Atypical: 0.3803
+Epoch 4 - mAP: 0.7628820581374558
+Epoch 4 - Save Best Score: 0.7629 Model
+Epoch 5 - avg_train_loss: 0.1464  avg_val_loss: 0.1727  time: 312s
+Epoch 5 - Negative: 0.9944  Typical: 0.9519  Indeterminate: 0.7384  Atypical: 0.4243
+Epoch 5 - mAP: 0.7772454221074763
+Epoch 5 - Save Best Score: 0.7772 Model
+Epoch 6 - avg_train_loss: 0.1388  avg_val_loss: 0.1715  time: 307s
+Epoch 6 - Negative: 0.9948  Typical: 0.9518  Indeterminate: 0.7400  Atypical: 0.4230
+Epoch 6 - mAP: 0.7774049213034492
+Epoch 6 - Save Best Score: 0.7774 Model
+========== fold: 4 result ==========
+Class: Negative for Pneumonia  AP: 0.9948
+Class: Typical Appearance  AP: 0.9518
+Class: Indeterminate Appearance  AP: 0.7400
+Class: Atypical Appearance  AP: 0.4230
+mAP: 0.7774
+========== CV ==========
+Class: Negative for Pneumonia AP: 0.9961
+Class: Typical Appearance AP: 0.9577
+Class: Indeterminate Appearance AP: 0.7353
+Class: Atypical Appearance AP: 0.4259
+mAP: 0.7787
