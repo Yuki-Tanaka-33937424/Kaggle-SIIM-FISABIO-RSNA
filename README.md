@@ -866,7 +866,7 @@ label - 与えられたバウンディングボックスに対する正しい予
     - ver3にSAM optimzierを加えた。<br>
     - mAP: 0.7787
 - 013<br>
-  - ver5<br>
+  - ver4<br>
     - 012_ver4のstep2。同じくSAM optimizerを加えた。また、epochが10になっていたのでそのまま10にした。<br>
     - mAP: 0.5697<br>
 - 014<br>
