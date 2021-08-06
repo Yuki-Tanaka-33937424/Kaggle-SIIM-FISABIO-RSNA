@@ -1,0 +1,69 @@
+========== fold: 0 training ==========
+Epoch 1 - avg_train_loss: 0.0467  avg_val_loss: 0.0006  time: 389s
+Epoch 1 - mAP: 1.0
+Epoch 1 - Save Best Loss: 0.0006 Model
+Epoch 2 - avg_train_loss: 0.0026  avg_val_loss: 0.0002  time: 388s
+Epoch 2 - mAP: 1.0
+Epoch 2 - Save Best Loss: 0.0002 Model
+Epoch 3 - avg_train_loss: 0.0025  avg_val_loss: 0.0002  time: 388s
+Epoch 3 - mAP: 1.0
+Epoch 4 - avg_train_loss: 0.0009  avg_val_loss: 0.0001  time: 388s
+Epoch 4 - mAP: 1.0
+Epoch 4 - Save Best Loss: 0.0001 Model
+========== fold: 0 result ==========
+Class: none  AP: 1.0000
+========== fold: 1 training ==========
+Epoch 1 - avg_train_loss: 0.0441  avg_val_loss: 0.0013  time: 389s
+Epoch 1 - mAP: 1.0
+Epoch 1 - Save Best Loss: 0.0013 Model
+Epoch 2 - avg_train_loss: 0.0034  avg_val_loss: 0.0001  time: 388s
+Epoch 2 - mAP: 1.0
+Epoch 2 - Save Best Loss: 0.0001 Model
+Epoch 3 - avg_train_loss: 0.0006  avg_val_loss: 0.0001  time: 388s
+Epoch 3 - mAP: 1.0
+Epoch 3 - Save Best Loss: 0.0001 Model
+Epoch 4 - avg_train_loss: 0.0004  avg_val_loss: 0.0001  time: 388s
+Epoch 4 - mAP: 1.0
+Epoch 4 - Save Best Loss: 0.0001 Model
+========== fold: 1 result ==========
+Class: none  AP: 1.0000
+========== fold: 2 training ==========
+Epoch 1 - avg_train_loss: 0.0436  avg_val_loss: 0.0000  time: 389s
+Epoch 1 - mAP: 1.0
+Epoch 1 - Save Best Loss: 0.0000 Model
+Epoch 2 - avg_train_loss: 0.0037  avg_val_loss: 0.0002  time: 388s
+Epoch 2 - mAP: 1.0
+Epoch 3 - avg_train_loss: 0.0025  avg_val_loss: 0.0000  time: 388s
+Epoch 3 - mAP: 1.0
+Epoch 4 - avg_train_loss: 0.0016  avg_val_loss: 0.0001  time: 388s
+Epoch 4 - mAP: 1.0
+========== fold: 2 result ==========
+Class: none  AP: 1.0000
+========== fold: 3 training ==========
+Epoch 1 - avg_train_loss: 0.0426  avg_val_loss: 0.0028  time: 389s
+Epoch 1 - mAP: 1.0
+Epoch 1 - Save Best Loss: 0.0028 Model
+Epoch 2 - avg_train_loss: 0.0034  avg_val_loss: 0.0040  time: 388s
+Epoch 2 - mAP: 1.0
+Epoch 3 - avg_train_loss: 0.0008  avg_val_loss: 0.0042  time: 388s
+Epoch 3 - mAP: 1.0
+Epoch 4 - avg_train_loss: 0.0006  avg_val_loss: 0.0043  time: 388s
+Epoch 4 - mAP: 1.0
+========== fold: 3 result ==========
+Class: none  AP: 1.0000
+========== fold: 4 training ==========
+Epoch 1 - avg_train_loss: 0.0428  avg_val_loss: 0.0006  time: 389s
+Epoch 1 - mAP: 1.0
+Epoch 1 - Save Best Loss: 0.0006 Model
+Epoch 2 - avg_train_loss: 0.0040  avg_val_loss: 0.0001  time: 388s
+Epoch 2 - mAP: 1.0
+Epoch 2 - Save Best Loss: 0.0001 Model
+Epoch 3 - avg_train_loss: 0.0009  avg_val_loss: 0.0002  time: 388s
+Epoch 3 - mAP: 1.0
+Epoch 4 - avg_train_loss: 0.0011  avg_val_loss: 0.0001  time: 388s
+Epoch 4 - mAP: 1.0
+Epoch 4 - Save Best Loss: 0.0001 Model
+========== fold: 4 result ==========
+Class: none  AP: 1.0000
+========== CV ==========
+Class: none  AP: 1.0000
