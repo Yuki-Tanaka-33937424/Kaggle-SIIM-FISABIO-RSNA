@@ -85,7 +85,7 @@ class CFG:
     debug = False
     use_amp = False
     print_freq = 100
-    size = 384
+    size = 512
     epochs = 6
     gradient_accumulation_steps = 1
     max_grad_norm = 10000
@@ -166,7 +166,7 @@ class CFG:
     # Model #
     ######################
     model_name = "resnet200d"
-    student_dir = os.path.join(ROOT_DIR, 'output/016/ver01')
+    student_dir = os.path.join(ROOT_DIR, 'input/016-weights')
     pretrained = True
     target_size = 4
 
@@ -894,6 +894,10 @@ def train_loop(folds, fold):
     # ====================================================
     model = CustomResNet200D(CFG.model_name, pretrained=CFG.pretrained)
     state = torch.load(os.path.join(CFG.student_dir, f'{CFG.model_name}_fold{fold}_best.pth'))
+    checkpoint = state['model']
+    for key in list(checkpoint.keys()):
+        checkpoint[key.replace('module.', '')] = checkpoint[key]
+        del checkpoint[key]
     model.load_state_dict(state['model'])
     model.to(device)
     criterion = get_criterion()
