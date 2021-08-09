@@ -1,9 +1,39 @@
 # Kaggle-SIIM-FISABIO-RSNA<br>
 KaggleのSIIM-FISABIO-RSNA COVID-19 Detectionコンペのリポジトリです。<br>
+codeというディレクトリに今回使用したスクリプトを置いていて、outputというディレクトリの対応するバージョンのところにlogなとが置いてあります。<br>
+**KaggleのDiscussionに弊チームのsolutionを公開しています。こちらから飛べるのでぜひご覧ください！**<br>
 
-## 方針
+## 最終結果<br>
+- Public:<br>
+- Private:<br>
+
+
+## 方針<br>
 - ファイルはgitで管理する。ただし頑張り過ぎない。<br>
 - Notebookやスクリプトはsiim_○○○_ver□□_hoge.ipynb(nb)の形で統一する。<br>
+
+## 振り返り<br>
+### 良かった点<br>
+- Yoloに頼らずに、EfficientDetのコードを自分のパイプラインに組み込んだこと。<br>
+- 過去コンペから解法を手早く引っ張って来れたこと。(3step学習など)
+- 初めてしっかりgithubを使ってコードを管理し、チーム内でもスムーズに共有ができた(これはshopeeの時の課題だったので成長)。<br>
+- 最後の最後に粘ってスコアを上げられた(これもshopeeの時の課題だった)。<br>
+
+### 悪かった点<br>
+- EfficientDetやmAPの計算の実装に時間がかかりすぎて本質的なことに踏み込んだのが遅かった。<br>
+- CVの切り方をしっかり確認しなかったせいで直前になってリークに気づいて直す羽目になった。(Shopeeの時にはできていたので大反省)<br>
+- 読んだ論文の本数が少なかった。もうすこし自分で真面目にサーベイをするべきだった。<br>
+- githubのProjectsでアイデアを管理する予定だったが、あまり使うことができなかったためにアイデアの実装スピードが遅かった。<br>
+- アイデアはGithub、記録はREADME、共有はslackで行っており、ちょっと分散させすぎたかもしれない
+- 単純に火がつくのが遅かった。<br>
+
+## Paper<br>
+- 参考にした論文の一覧。決して全てを理解しているわけではない。<br>
+
+| No | Name | Detail | Date | link |
+| :---: | :---: | :---: | :---: | :---: |
+| 01 | Weighted boxes fusion: Ensembling boxes from different object detection models | 各bboxのconfidence scoreをもとにしてbboxを合成する、物体検出におけるアンサンブル手法 | 9 Feb 2021 | [link](https://arxiv.org/pdf/1910.13302) |
+| 02 | The Lovasz-Softmax loss: A tractable surrogate for the optimization of the intersection-over-union measure in neural networks | IOUを直接最適化する手法。今回のコンペにおけるAuxiliary Lossに入れたかった。 | 9 Apr 2018 | [link](https://arxiv.org/pdf/1705.08790.pdf) |<br>
 
 ## Overview(Deepl)<br>
 ### **Description**<br>
@@ -1006,3 +1036,17 @@ label - 与えられたバウンディングボックスに対する正しい予
   - ver2<br>
     - 019_ver2のstep3<br>
     - mAP: 0.7833<br>
+
+### 20210809<br>
+- サブミッションについては、たくさんしすぎてとてもではないがここに書き写しきれなくなった。<br>
+- 002<br>
+  - ver48<br>
+    - 同じ画像の中のbboxは複数のレコードに分けられているデータセットをずっと使ってきたが、それをそのままStratifiedKFoldで分けてしまうと同じ画像のデータが複数のfoldに分かれてしまってリークすることに気づいたので修正した。<br>
+    - mAP: 0.2874<br>
+    - リークを防ぐだけでここまで上がった。もっと早くデータの分け方についてしっかり確認するべきだった。<br>
+  - ver49<br>
+    - ver48の残りのfoldを回した。<br>
+- 014<br>
+  - ver10<br>
+    - 004_ver14で入れた外部データを入れた。本当はstep1とstep2も外部データ込みで学習させたかったが、対応するbboxのアノテーションが存在しないので、アノテーションが不要なstep3からリークが無いように加えた。<br>
+    - 動作確認だけして引き継いだ。<br>

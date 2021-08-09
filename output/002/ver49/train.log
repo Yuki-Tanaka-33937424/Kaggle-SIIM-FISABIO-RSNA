@@ -1,0 +1,80 @@
+========== fold: 1 training ==========
+Epoch 1 - avg_train_loss: 7.9038  avg_val_loss: 0.9570  time: 723s
+Epoch 1 - Save Best Loss: 0.9570 Model
+Epoch 2 - avg_train_loss: 0.8713  avg_val_loss: 0.8397  time: 717s
+Epoch 2 - Save Best Loss: 0.8397 Model
+Epoch 3 - avg_train_loss: 0.8133  avg_val_loss: 0.8224  time: 716s
+Epoch 3 - Save Best Loss: 0.8224 Model
+Epoch 4 - avg_train_loss: 0.7866  avg_val_loss: 0.8065  time: 716s
+Epoch 4 - Save Best Loss: 0.8065 Model
+Epoch 5 - avg_train_loss: 0.7622  avg_val_loss: 0.7984  time: 717s
+Epoch 5 - Save Best Loss: 0.7984 Model
+Epoch 6 - avg_train_loss: 0.7312  avg_val_loss: 0.8000  time: 717s
+Epoch 7 - avg_train_loss: 0.6975  avg_val_loss: 0.8053  time: 717s
+Epoch 8 - avg_train_loss: 0.6534  avg_val_loss: 0.8122  time: 718s
+Epoch 9 - avg_train_loss: 0.6107  avg_val_loss: 0.8323  time: 718s
+Epoch 10 - avg_train_loss: 0.5841  avg_val_loss: 0.8313  time: 719s
+========== fold: 1 result ==========
+best loss: 0.7984
+Class: opacity  AP: 0.2837
+========== fold: 2 training ==========
+Epoch 1 - avg_train_loss: 6.9369  avg_val_loss: 0.9762  time: 716s
+Epoch 1 - Save Best Loss: 0.9762 Model
+Epoch 2 - avg_train_loss: 0.8709  avg_val_loss: 0.8770  time: 714s
+Epoch 2 - Save Best Loss: 0.8770 Model
+Epoch 3 - avg_train_loss: 0.8118  avg_val_loss: 0.8611  time: 717s
+Epoch 3 - Save Best Loss: 0.8611 Model
+Epoch 4 - avg_train_loss: 0.7839  avg_val_loss: 0.8440  time: 718s
+Epoch 4 - Save Best Loss: 0.8440 Model
+Epoch 5 - avg_train_loss: 0.7574  avg_val_loss: 0.8322  time: 718s
+Epoch 5 - Save Best Loss: 0.8322 Model
+Epoch 6 - avg_train_loss: 0.7280  avg_val_loss: 0.8341  time: 718s
+Epoch 7 - avg_train_loss: 0.6930  avg_val_loss: 0.8312  time: 718s
+Epoch 7 - Save Best Loss: 0.8312 Model
+Epoch 8 - avg_train_loss: 0.6530  avg_val_loss: 0.8395  time: 719s
+Epoch 9 - avg_train_loss: 0.6147  avg_val_loss: 0.8639  time: 721s
+Epoch 10 - avg_train_loss: 0.5888  avg_val_loss: 0.8720  time: 719s
+========== fold: 2 result ==========
+best loss: 0.8312
+Class: opacity  AP: 0.2741
+========== fold: 3 training ==========
+Epoch 1 - avg_train_loss: 7.7119  avg_val_loss: 0.9553  time: 717s
+Epoch 1 - Save Best Loss: 0.9553 Model
+Epoch 2 - avg_train_loss: 0.8677  avg_val_loss: 0.8663  time: 717s
+Epoch 2 - Save Best Loss: 0.8663 Model
+Epoch 3 - avg_train_loss: 0.8125  avg_val_loss: 0.8421  time: 716s
+Epoch 3 - Save Best Loss: 0.8421 Model
+Epoch 4 - avg_train_loss: 0.7827  avg_val_loss: 0.8395  time: 717s
+Epoch 4 - Save Best Loss: 0.8395 Model
+Epoch 5 - avg_train_loss: 0.7578  avg_val_loss: 0.8155  time: 717s
+Epoch 5 - Save Best Loss: 0.8155 Model
+Epoch 6 - avg_train_loss: 0.7238  avg_val_loss: 0.8168  time: 718s
+Epoch 7 - avg_train_loss: 0.6902  avg_val_loss: 0.8348  time: 716s
+Epoch 8 - avg_train_loss: 0.6408  avg_val_loss: 0.8505  time: 719s
+Epoch 9 - avg_train_loss: 0.5996  avg_val_loss: 0.8625  time: 718s
+Epoch 10 - avg_train_loss: 0.5700  avg_val_loss: 0.8693  time: 718s
+========== fold: 3 result ==========
+best loss: 0.8155
+Class: opacity  AP: 0.2886
+========== fold: 4 training ==========
+Epoch 1 - avg_train_loss: 7.1006  avg_val_loss: 0.9679  time: 716s
+Epoch 1 - Save Best Loss: 0.9679 Model
+Epoch 2 - avg_train_loss: 0.8658  avg_val_loss: 0.8686  time: 716s
+Epoch 2 - Save Best Loss: 0.8686 Model
+Epoch 3 - avg_train_loss: 0.8106  avg_val_loss: 0.8420  time: 715s
+Epoch 3 - Save Best Loss: 0.8420 Model
+Epoch 4 - avg_train_loss: 0.7825  avg_val_loss: 0.8317  time: 715s
+Epoch 4 - Save Best Loss: 0.8317 Model
+Epoch 5 - avg_train_loss: 0.7581  avg_val_loss: 0.8108  time: 714s
+Epoch 5 - Save Best Loss: 0.8108 Model
+Epoch 6 - avg_train_loss: 0.7281  avg_val_loss: 0.8149  time: 717s
+Epoch 7 - avg_train_loss: 0.6908  avg_val_loss: 0.8199  time: 713s
+Epoch 8 - avg_train_loss: 0.6466  avg_val_loss: 0.8387  time: 716s
+Epoch 9 - avg_train_loss: 0.6039  avg_val_loss: 0.8462  time: 718s
+Epoch 10 - avg_train_loss: 0.5692  avg_val_loss: 0.8638  time: 717s
+========== fold: 4 result ==========
+best loss: 0.8108
+Class: opacity  AP: 0.2831
+========== CV ==========
+mean of loss: 0.8140
+Class: opacity  AP: 0.2781
