@@ -1,3 +1,4 @@
 /input
 *.pth
 /output/002/ver46/predictions.csv
+/output/002/ver49/predictions.csv
