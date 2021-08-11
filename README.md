@@ -1,14 +1,16 @@
 # Kaggle-SIIM-FISABIO-RSNA<br>
 <img width="945" alt="スクリーンショット 2021-08-10 8 58 44" src="https://user-images.githubusercontent.com/70050531/128788831-e507c7bd-1131-422e-80e3-48a364a6972f.png">
 KaggleのSIIM-FISABIO-RSNA COVID-19 Detectionコンペのリポジトリです。<br>
-codeというディレクトリに今回使用したスクリプトを置いていて、outputというディレクトリの対応するバージョンのところにlogなとが置いてあります。<br>
-**KaggleのDiscussionに弊チームのsolutionを公開しています。こちらから飛べるのでぜひご覧ください！**<br>
+codeというディレクトリに今回使用したスクリプトを置いていて、outputというディレクトリの対応するバージョンのところにlogなどが置いてあります。<br>
+
+**KaggleのDiscussionに弊チームのsolutionを公開しています。[こちら](https://www.kaggle.com/c/siim-covid19-detection/discussion/263832)から飛べるのでぜひご覧ください！**<br>
 
 ## 最終結果<br>
 <img width="794" alt="スクリーンショット 2021-08-10 9 39 04" src="https://user-images.githubusercontent.com/70050531/128791275-13fcfddc-907f-41b9-a462-ac0c749c6a6b.png">
 
 - Public: 0.628 59th/1324<br>
 - Private: 0.607 78th/1324<br>
+- 銀圏からshake downして銅でした。悔しい...<br>
 
 
 ## 方針<br>
